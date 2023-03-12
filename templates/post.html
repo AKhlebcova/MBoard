@@ -1,0 +1,12 @@
+{% extends 'flatpages/default.html'%}
+{% block title %}
+{{ post.title }}
+{% endblock title %}
+{% block content %}
+
+
+{{ post.content|safe }} <hr>
+{{ post.get_author }} <hr>
+{{ post.get_public_date }} <hr>
+<a href='' class="button">Добавить комментарий</a>
+{% endblock content %}
