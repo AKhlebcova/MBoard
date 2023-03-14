@@ -1,0 +1,63 @@
+{% extends 'flatpages/default.html'%}
+
+{% load custom_tags %}
+{% block title %}
+<h2>Поиск:</h2>
+{% endblock title %}
+
+
+{% block content %}
+
+
+<form action="" method="get">
+    <h2>{{ filterset.form.as_table }}</h2>
+       <input type="submit" value="Найти" />
+</form>
+
+
+<hr>
+    {% if feeds %}
+        <table>
+            <tr><b>
+                <td>Пользователь</td>
+                <td>Дата публикации</td>
+                <td>Превью</td>
+                <td>Принять комментарий</td>
+                <td>Удалить комментарий</td>
+
+            </b></tr>
+            {% for feed in feeds %}
+            <tr>
+                <td>{{ feed.get_feedmaster }}</td>
+                <td>{{ feed.get_message_date }}</td>
+                <td>{{ feed.message }}</td>
+                <td><a href="update/{{ feed.id }}">Принять</a></td>
+                <td><a href="delete/{{ feed.id }}">Удалить</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h2>Комментарии отсутствуют</h2>
+    {% endif %}
+
+
+   {% if page_obj.has_previous %}
+       <a href="?{% url_replace page=1 %}">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+   {% endif %}
+
+   {{ page_obj.number }}
+
+   {% if page_obj.has_next %}
+       <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+   {% endif %}
+
+
+{% endblock content %}

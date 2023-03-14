@@ -1,0 +1,14 @@
+from django.contrib.auth.models import User
+from board.models import Profile
+user = User.objects.get(username='anna123')
+profile = Profile(user=user)
+profile.save()
+user = User.objects.get(username='vadim123')
+profile = Profile(user=user)
+profile.save()
+user = User.objects.get(username='petr123')
+profile = Profile(user=user)
+profile.save()
+user = User.objects.get(username='Oleg222')
+profile = Profile(user=user)
+profile.save()

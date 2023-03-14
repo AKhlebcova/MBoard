@@ -1,0 +1,19 @@
+{% extends 'flatpages/default.html'%}
+{% block title %}
+<h2>Профиль пользователя </h2>
+{% endblock title %}
+
+{% block content %}
+{% if user_form.errors %}
+{% for key, value in user_form.errors.items %}
+{{ value }}
+{% endfor %}
+{% endif %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ user_form.as_table }}
+    {{ profile_form.as_table }}
+
+    <button type="submit">Сохранить</button>
+</form>
+{% endblock content %}

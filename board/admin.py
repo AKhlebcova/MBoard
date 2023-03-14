@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Post, Category, Feedback
+from .models import Post, Category, Feedback, Profile
 from ckeditor.widgets import CKEditorWidget
 
 
@@ -9,6 +9,14 @@ from ckeditor.widgets import CKEditorWidget
 
 # Регистрируем модели для перевода в админке
 
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'photo',
+        'email_reserve',
+        'phone_num',
+    )
 
 
 

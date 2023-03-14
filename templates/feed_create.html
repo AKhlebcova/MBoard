@@ -1,18 +1,17 @@
 {% extends 'flatpages/default.html'%}
 {% block title %}
-Добавьте публикацию:
+Оставьте отзыв о публикации:
 {% endblock title %}
 
 {% block content %}
-
+<h4>Текст: {{ post.title }}<br>{{ post.content|safe }}</h4>
+<h4>Автор: {{ post.get_author }}<br></h4>
 
 <form action="" method="post">
     {% csrf_token %}
-    {{ form.media }}
     <h3>{{ form.as_p }}</h3>
     <input type="submit" value="Сохранить" />
 
 </form>
-
 
 {% endblock content %}

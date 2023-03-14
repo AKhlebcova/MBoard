@@ -1,80 +1,94 @@
-<!DOCTYPE HTML>
 
+
+
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
 	<head>
-		<title>MessageBoard</title>
+		<title>MESSAGEBOARD</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        {% load static %}
-		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+		{% load static %}
+		<link rel="stylesheet" href="{% static 'css/main.css' %}"/>
 	</head>
-	<body>
-		<div id="page-wrapper">
+	<body class="is-preload">
 
-			<!-- Header -->
-				<div id="header-wrapper">
-					<div class="container">
-						<div class="row">
-							<div class="col-12">
+		<!-- Wrapper -->
+			<div id="wrapper">
 
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
 								<header id="header">
-									<h1><a href="index.html" id="logo">MESSAGEBOARD</a></h1>
-									<nav id="nav">
-										<a href="index.html" class="current-page-item">Homepage</a>
-										<a href="twocolumn1.html">Two Column #1</a>
-										<a href="twocolumn2.html">Two Column #2</a>
-										<a href="onecolumn.html">One Column</a>
-										<a href="threecolumn.html">Three Column</a>
-									</nav>
+							{% if user.is_authenticated %}
+							<a href="{% url 'logout'%}?next=/posts/" class="button">Выйти</a>
+							{% else %}
+							<a href="{% url 'login'%}?next={{request.path}}" class="button">Войти</a>
+							<a href="{% url 'signup'%}?next={{request.path}}" class="button" >Зарегистрироваться</a>
+									{% endif %}
 								</header>
 
-							</div>
-						</div>
-					</div>
-				</div>
-
-			<!-- Banner -->
-				<div id="banner-wrapper">
-					<div class="container">
-
-						<div id="banner">
-							<h2>{% block title %} {% endblock title %}</h2>
-						</div>
-
-					</div>
-				</div>
-
-			<!-- Main -->
-				<div id="main">
-					<div class="container">
-						<div class="row main-row">
-							<div class="col-12 col-12-medium">
-
-								<section>
-									<h3>{% block content %} {% endblock content %}</h3>
+							<!-- Banner -->
+								<section id="banner">
+									<div class="content">
+										<header>
+											<h1>Hi, I’m MessageBoard</h1>
+										</header>
+									</div>
 								</section>
-							</div>
+
+							<!-- Section -->
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>{% block title %} {% endblock title %}</h2>
+									</header>
+											<div class="col-6 col-12-medium">
+												<h4>{% block content %} {% endblock content %}</h4>
+											</div>
+								</section>
+
 						</div>
 					</div>
-				</div>
 
-			<!-- Footer -->
-				<div id="footer-wrapper">
-					<div class="container">
-						<div class="row">
-							<div class="col-12">
-								<div id="copyright">
-									&copy; Untitled. All rights reserved
-								</div>
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
 
-							</div>
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Меню</h2>
+									</header>
+									<ul>
+										<li><a href="/posts/">ВСЕ ПУБЛИКАЦИИ</a></li>
+										<li><a href="#">Generic</a></li>
+										<li><a href="#">Elements</a></li>
+										<li><a href="#">Etiam Dolore</a></li>
+										<li><a href="#">Adipiscing</a></li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+
+
+							<!-- Section -->
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
 						</div>
 					</div>
-				</div>
 
-		</div>
-
-
-
+			</div>
 	</body>
 </html>

@@ -8,5 +8,19 @@
 {{ post.content|safe }} <hr>
 {{ post.get_author }} <hr>
 {{ post.get_public_date }} <hr>
-<a href='' class="button">Добавить комментарий</a>
+{% if user.is_authenticated %}
+    {% if post.author == user %}
+    Вы не можете оставлять отзывы к своим объявлениям<br>
+    <br>
+    <a href="/profile/replies/?feedpost={{ post.id }}" class="button">Показать все комментарии</a><br>
+    {% else %}
+    <a href="/posts/{{ post.id }}/reply/" class="button">Добавить комментарий</a>
+    {% endif %}
+{% else %}
+Чтобы оставить отзыв необходимо <br>
+<a href="{% url 'login' %}?next={{ request.path }}" class="button">Войти</a><br>
+или <br>
+<a href="{% url 'signup' %}?next={{ request.path }}" class="button" >Зарегистрироваться</a>
+{% endif %}
+
 {% endblock content %}
