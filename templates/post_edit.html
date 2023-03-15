@@ -1,11 +1,10 @@
 {% extends 'flatpages/default.html'%}
 {% block title %}
-Добавьте объявление:
+Отредактируйте объявление:
 {% endblock title %}
 
 {% block content %}
-
-
+{% if user == object.author %}
 <form action="" method="post">
     {% csrf_token %}
     {{ form.media }}
@@ -13,6 +12,8 @@
     <input type="submit" value="Сохранить" />
 
 </form>
-
+{% else %}
+Вы не можете корректировать данное объявление
+{% endif %}
 
 {% endblock content %}

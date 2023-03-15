@@ -1,9 +1,7 @@
 from ckeditor.fields import RichTextField
 from django.db import models
 from django.urls import reverse
-from django.contrib.auth.models import User, Group
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+from django.contrib.auth.models import User
 
 
 class Category(models.Model):
@@ -22,12 +20,6 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post_detail', args=[str(self.id)])
-
-    #
-    # def save(self, *args, **kwargs):
-    #     super().save(*args, **kwargs)
-    #     # time.sleep(30)
-    #     cache.delete(f'post-{self.id}')
 
     def __str__(self):
         return f'{self.title}'
@@ -58,12 +50,9 @@ class Feedback(models.Model):
         return self.user.username
 
     def reply_preview(self):
-        if len(self.message) <= 124:
+        if len(self.message) <= 15:
             return f'{self.message}...'
-        return f'{self.message[0:124]}...'
-
-
-
+        return f'{self.message[0:15]}...'
 
 
 class OnetimeCode(models.Model):
@@ -75,19 +64,14 @@ class OnetimeCode(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, verbose_name='Имя пользователя', on_delete=models.CASCADE)
     photo = models.ImageField(default='default.png', upload_to='profile_images', verbose_name='Аватар')
-    # first_name = models.CharField(max_length=25, verbose_name='Имя', blank=True, null=True)
-    # last_name = models.CharField(max_length=25, verbose_name='Фамилия', blank=True, null=True)
+
     email_reserve = models.EmailField(verbose_name='Дополнительный email', blank=True)
     phone_num = models.CharField(max_length=25, verbose_name='Номер телефона', blank=True, null=True)
+
     def __str__(self):
         return self.user.username
 
     def get_absolute_url(self):
         return reverse('profile', args=[str(self.id)])
-
-
-
-
-
 
 # Create your models here.

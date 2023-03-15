@@ -20,8 +20,8 @@
         <table>
             <tr><b>
                 <td>Пользователь</td>
-                <td>Дата публикации</td>
-                <td>Превью</td>
+                <td>Дата</td>
+                <td>Текст</td>
                 <td>Принять комментарий</td>
                 <td>Удалить комментарий</td>
 
@@ -39,7 +39,13 @@
     {% else %}
         <h2>Комментарии отсутствуют</h2>
     {% endif %}
-
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 
    {% if page_obj.has_previous %}
        <a href="?{% url_replace page=1 %}">1</a>

@@ -6,13 +6,16 @@
 
 
 {{ post.content|safe }} <hr>
+{{ post.category }}<hr>
 {{ post.get_author }} <hr>
 {{ post.get_public_date }} <hr>
 {% if user.is_authenticated %}
     {% if post.author == user %}
     Вы не можете оставлять отзывы к своим объявлениям<br>
     <br>
-    <a href="/profile/replies/?feedpost={{ post.id }}" class="button">Показать все комментарии</a><br>
+    <a href="/posts/{{ post.id }}/edit/" class="button">Редактировать</a>
+    <a href="/posts/{{ post.id }}/delete/" class="button">Удалить</a>
+    <a href="/profile/replies/?feedpost={{ post.id }}" class="button">Показать все комментарии</a>
     {% else %}
     <a href="/posts/{{ post.id }}/reply/" class="button">Добавить комментарий</a>
     {% endif %}
